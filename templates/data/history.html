@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Użytkownik</th>
+                <th scope="col">Szpital</th>
+                <th scope="col">Plik</th>
+                <th scope="col">Data dodania</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in history %}
+            {% if item.hospital.name == current_user.hospital.name or current_user.is_admin() %}
+            <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td>{{ item.user.name }}</td>
+                <td>{{ item.hospital.name }}</td>
+                <td>{{ item.filename }}</td>
+                <td>{{ item.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
